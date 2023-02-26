@@ -3,13 +3,13 @@ import "components/DayListItem.scss";
 import classNames from "classnames";
 
 export default function DayListItem(props) {
-  let itemClass = classNames(
+  const itemClass = classNames(
     "day-list__item",
     { "day-list__item--selected": props.selected },
     { "day-list__item--full": props.spots === 0 }
   );
   return (
-    <li className={itemClass} onClick={() => props.setDay(props.name)}>
+    <li className={itemClass} onClick={props.setDay} selected={props.selected}>
       <h2 className="text--regular">{props.name}</h2>
       {/*Conditional to render appropate text depending of remaining spots, if spots === 0, it renders "no spots available" */}
       {!props.spots && <h3 className="text--light">no spots remaining</h3>}
