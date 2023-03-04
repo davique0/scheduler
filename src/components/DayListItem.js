@@ -9,7 +9,11 @@ export default function DayListItem(props) {
     { "day-list__item--full": props.spots === 0 }
   );
   return (
-    <li className={dayClass} onClick={props.setDay} selected={props.selected}>
+    <li
+      className={dayClass}
+      onClick={() => props.setDay(props.name)}
+      selected={props.selected}
+    >
       <h2 className="text--regular">{props.name}</h2>
       {/*Conditional to render appropate text depending of remaining spots, if spots === 0, it renders "no spots available" */}
       {!props.spots && <h3 className="text--light">no spots remaining</h3>}
