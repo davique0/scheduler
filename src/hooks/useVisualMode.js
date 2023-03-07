@@ -11,9 +11,12 @@ export default function useVisualMode(initial) {
   };
   //goes back to previous mode
   const back = () => {
-    setHistory((prev) => [...prev.slice(0, -1)]);
-    setMode(history[history.length - 2]);
-    console.log(history);
+    //create a new array to delete last item of history array and set it as new history
+    let newHistory = [...history];
+    newHistory.pop();
+    setHistory(newHistory);
+    //access last item of the array which after deleting should be previous mode
+    setMode(newHistory[newHistory.length - 1]);
   };
   return { mode, transition, back };
 }
