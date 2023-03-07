@@ -11,6 +11,8 @@ export default function useVisualMode(initial) {
   };
   //goes back to previous mode
   const back = () => {
+    //if history array is already at first value it shouldn't do anything
+    if (history.length === 1) return;
     //create a new array to delete last item of history array and set it as new history
     let newHistory = [...history];
     newHistory.pop();
