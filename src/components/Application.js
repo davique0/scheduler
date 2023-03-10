@@ -43,7 +43,6 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview },
     };
-    console.log(appointment);
     const appointments = {
       ...state.appointments,
       [id]: appointment,
