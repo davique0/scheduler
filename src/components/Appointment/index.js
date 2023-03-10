@@ -14,6 +14,8 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
+
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -29,17 +31,19 @@ export default function Appointment(props) {
       transition(SHOW);
     });
   };
-
+  //mode send to confirm dialog box
   const onDelete = () => {
     transition(CONFIRM)
   };
-
+  //if confirm on dialog box it will delete
   const confirmDelete = (id) => {
     transition(DELETING);
     props.cancelInterview(id).then(() => {
       transition(EMPTY);
     });
   }
+
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -49,6 +53,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => onDelete()}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -61,6 +66,13 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message="Saving" />}
       {mode === CONFIRM && <Confirm onConfirm={() => confirmDelete(props.id)} onCancel={() => back()} message="Are you sure you would like to delete?" />}
       {mode === DELETING && <Status message="Deleting" />}
+      {mode === EDIT && <Form
+        interviewers={props.interviewers}
+        onCancel={() => back()}
+        onSave={(student, interviewer) => save(student, interviewer)}
+        student={props.interview.student}
+        interviewer={props.interview.interviewer.id}
+      />}
     </article>
   );
 }

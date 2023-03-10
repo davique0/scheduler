@@ -6,6 +6,7 @@ export default function Form(props) {
   //declaring state, default would be incoming prop in case it is an edition or empty in case it is a new appointment
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  console.log(interviewer);
 
   //Resets Student and Interviewer for when cancel is clicked
   const reset = () => {
