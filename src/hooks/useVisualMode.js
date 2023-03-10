@@ -6,14 +6,14 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
   //setMode to a new one
   const transition = (newMode, replace = false) => {
-    //if replace is true, like in an error, it deletes alst on history and replace it with newMode.
+    //if replace is true, like in an error, it deletes last on history and replace it with newMode.
     if (replace) {
-      setHistory([...history.slice(0, history.length - 1), newMode]);
+      setHistory(prev => ([...prev.slice(0, prev.length - 1), newMode]));
       setMode(newMode);
       return;
     }
     setMode(newMode);
-    setHistory([...history, newMode]);
+    setHistory(prev => ([...prev, newMode]));
   };
   //goes back to previous mode
   const back = () => {
