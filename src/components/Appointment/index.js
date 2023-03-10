@@ -25,6 +25,8 @@ export default function Appointment(props) {
   );
   //function that saves a new interview object and send it to bookInterview
   const save = (name, interviewer) => {
+    //throws an error if name or interviewer aren't entered by user
+    if (!name || !interviewer) return transition(ERROR_SAVE, true)
     const interview = {
       student: name,
       interviewer,
