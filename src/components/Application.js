@@ -43,11 +43,16 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview },
     };
+    console.log(appointment);
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
-    setState((prev) => ({ ...prev, appointments }));
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then((response) => {
+        setState((prev) => ({ ...prev, appointments }));
+      });
   };
 
   return (
