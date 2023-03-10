@@ -37,13 +37,17 @@ export default function Application(props) {
   //calling selector function to only pich one day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
-  console.log(dailyInterviewers);
 
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
     };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState((prev) => ({ ...prev, appointments }));
   };
 
   return (
