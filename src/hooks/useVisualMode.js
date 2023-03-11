@@ -1,4 +1,3 @@
-import Empty from "components/Appointment/Empty";
 import { useState } from "react";
 
 export default function useVisualMode(initial) {
