@@ -27,6 +27,11 @@ export default function useApplicationData() {
     });
   }, []);
 
+  useEffect(() => {
+    updateSpotsRemaining()
+    console.log("fire");
+  }, [state.appointments])
+
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -39,7 +44,7 @@ export default function useApplicationData() {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((response) => {
         setState((prev) => ({ ...prev, appointments }));
-      });
+      })
   };
 
   const cancelInterview = (id) => {
@@ -52,7 +57,22 @@ export default function useApplicationData() {
       .delete(`/api/appointments/${id}`)
       .then((response) => {
         setState((prev) => ({ ...prev, appointments }));
-      });
+      })
   };
+
+  const updateSpotsRemaining = () => {
+    const updatedDays = state.days.map((day) => {
+
+      const updatedSpots = day.appointments.length - day.appointments.filter((appointment) => { return state.appointments[appointment].interview }).length
+
+      const updatedDay = { ...day, spots: updatedSpots }
+
+      return updatedDay
+
+    })
+
+    setState((prev) => ({ ...prev, days: updatedDays }))
+  }
+
   return { state, setDay, bookInterview, cancelInterview }
 }
