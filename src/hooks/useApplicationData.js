@@ -29,7 +29,6 @@ export default function useApplicationData() {
 
   useEffect(() => {
     updateSpotsRemaining()
-    console.log("fire");
   }, [state.appointments])
 
   const bookInterview = (id, interview) => {
