@@ -1,16 +1,39 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// const SET_DAY = "SET_DAY";
+// const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+// const SET_INTERVIEW = "SET_INTERVIEW";
+
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case SET_DAY:
+//       return { ...state, day }
+//     case SET_APPLICATION_DATA:
+//       return { /* insert logic */ }
+//     case SET_INTERVIEW: {
+//       return /* insert logic */
+//     }
+//     default:
+//       throw new Error(
+//         `Tried to reduce with unsupported action type: ${action.type}`
+//       );
+//   }
+// }
+
 
 export default function useApplicationData() {
+  // const [state, dispatch] = useReducer(reducer, 0)
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {},
   });
-  //assigning different functions for diferent states
+  // assigning different functions for diferent states
   const setDay = (day) => setState({ ...state, day });
+  // const setDay = (day) => dispatch({ type: SET_DAY, day})
   //fetching data from scheduler-api
   useEffect(() => {
     Promise.all([
