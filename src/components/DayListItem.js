@@ -13,6 +13,7 @@ export default function DayListItem(props) {
       className={dayClass}
       onClick={() => props.setDay(props.name)}
       selected={props.selected}
+      data-testid="day"
     >
       <h2 className="text--regular">{props.name}</h2>
       {/*Conditional to render appropate text depending of remaining spots, if spots === 0, it renders "no spots available" */}
